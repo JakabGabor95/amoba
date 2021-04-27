@@ -1,0 +1,2 @@
+# amoba
+Amőba-projekt
