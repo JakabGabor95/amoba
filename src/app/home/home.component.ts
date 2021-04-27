@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MapSizeService } from '../service/map-size.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +18,11 @@ export class HomeComponent implements OnInit {
 
   playersArray:Array<any> = [];
 
-  constructor() {
+  constructor(
+    private mapSizeService: MapSizeService,
+    private router: Router
+  ) {
+
     this.amobaForm = new FormGroup({
       map: new FormControl('', Validators.required),
       numberOfPlayers: new FormControl('', Validators.required),
@@ -44,6 +50,9 @@ export class HomeComponent implements OnInit {
 
   detailsOfPlayers = () => {
     const amobaFormValues = this.amobaForm.value;
+
+    this.mapSizeService.mapSize.next(amobaFormValues);
+    this.router.navigate(['game']);
 
     console.log(amobaFormValues);
 

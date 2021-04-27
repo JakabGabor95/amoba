@@ -1,0 +1,129 @@
+.game {
+    font-family: 'Londrina Solid', cursive;
+    color: #ffe3de;
+    height: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #ffe3de;
+    padding: 1em;
+}
+
+#next-player-text {
+    text-align: center;
+    color: #ffe3de;
+    padding: 1em;
+}
+
+.board
+ {
+    width: 90%;
+    height: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: #03506f 0px 0px 29px 0px;
+}
+
+.fieldsSmall {
+    width: 33.3%;
+    height: 33.3%;
+    border: 3px solid #ffe3de;
+}
+
+.fieldsMedium {
+    width: 20%;
+    height: 20%;
+    border: 3px solid #ffe3de;
+}
+
+.field {
+    color: #03506f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4em;
+    font-weight: bold;
+}
+
+.field:hover {
+    background: #093d5257;
+    cursor: pointer;
+}
+
+.disable {
+    pointer-events: none;
+}
+
+.points {
+    color: #ffe3de;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 1em 1em 0;
+    width: 90%;
+    margin: 3% auto;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: #03506f 0px 0px 29px 0px;
+}
+
+.winner-box {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.95);
+    text-transform: uppercase;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    padding-top: 15em;
+}
+
+#new-game-btn {
+    background: #542a33;
+    color: #ffe3de;
+    text-transform: uppercase;
+    padding: 0.5em;
+    font-size: 1.2em;
+    width: 300px;
+    margin: 0 auto;
+    display: none;
+    &:hover {
+        color: #ffe3de;
+        box-shadow: #03506f 0px 0px 29px 0px;
+    }
+}
+
+.winnerPlayerText {
+    display: none;
+}
+
+@media only screen and (min-width: 765px) {
+   .board {
+        height: 600px;
+        width: 80%;
+    }
+    .points {
+        width: 80%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .board {
+        height: 700px;
+        width: 50%;
+    }
+    .points {
+        width: 50%;
+    }
+}

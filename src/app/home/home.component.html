@@ -24,13 +24,13 @@
                 <div class="flex-container">
                 <tr *ngFor = "let player of playersArray">
                     <td >{{player.playerNumber}}.játékos</td>
-                    <td class="d-flex flex-d-column mb-3"> 
-                        <input id="firstPlayerName" formControlName = '{{player.formControlName}}' type="text" class="form-control" placeholder="Felhasználónév " aria-label="Username" aria-describedby="basic-addon1">
+                    <td class="d-flex  mb-3 input-container"> 
+                        <input class = 'nameInput' formControlName = '{{player.formControlName}}' type="text" class="" placeholder="Felhasználónév " aria-label="Username" aria-describedby="basic-addon1">
                         <select  id="firstPalyerselectedIcon" formControlName = "{{player.selectedIcon}}" class="form-select" aria-label="Default select example">
                             <option value="X">X</option>
                             <option value="O">O</option>
-                            <option value="P">P</option>
-                            <option value="P">C</option>
+                            <option value="♥">♥</option>
+                            <option value="☻">☻</option>
                         </select>
                     </td> 
                     </tr>
