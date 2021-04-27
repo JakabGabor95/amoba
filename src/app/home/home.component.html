@@ -1,0 +1,45 @@
+<form [formGroup]="amobaForm" id="amobaForm" (ngSubmit) = " detailsOfPlayers()">
+    <div class="mb-3">
+        <label for="map">Pálya mérete:</label>
+        <select id="map" formControlName = "map" class="form-select" aria-label="Default select example">
+            <option value="small">3 X 3</option>
+            <option value="medium">5 X 5</option>
+            <option value="large">10 X 10</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="numberOfPlayers">Játékosok száma:</label>
+        <select (change) = "howManyPlayers($event.target.value)" id="numberOfPlayers" formControlName = "numberOfPlayers"  class="form-select" aria-label="Default select example">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+    </div>
+    
+    <div class="mb-3">
+        <label for="floatingInput" *ngIf = "showPlayerNameLabel" class="mb-3">Játékosok nevei:</label>
+        <table>
+            <tbody class="d-flex flex-d-column">
+                <div class="flex-container">
+                <tr *ngFor = "let player of playersArray">
+                    <td >{{player.playerNumber}}.játékos</td>
+                    <td class="d-flex flex-d-column mb-3"> 
+                        <input id="firstPlayerName" formControlName = '{{player.formControlName}}' type="text" class="form-control" placeholder="Felhasználónév " aria-label="Username" aria-describedby="basic-addon1">
+                        <select  id="firstPalyerselectedIcon" formControlName = "{{player.selectedIcon}}" class="form-select" aria-label="Default select example">
+                            <option value="X">X</option>
+                            <option value="O">O</option>
+                            <option value="P">P</option>
+                            <option value="P">C</option>
+                        </select>
+                    </td> 
+                    </tr>
+                </div>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mb-3">
+        <button [disabled] = "amobaForm.invalid"  type="submit" class="btn btn-warning">Játék</button>
+    </div>
+</form>
