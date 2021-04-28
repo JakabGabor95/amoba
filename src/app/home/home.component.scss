@@ -19,18 +19,20 @@
        box-shadow: #B2C192 0px 0px 29px 0px;
     }
 }
-
-select,
-input {
+input,
+select
+ {
     border: none;
-   background:  #474E40;
-    color: white;
+    background-color:  #474E40;
+    color: #ffe3de;
     font-size: 1em;
    
 
 }
 
 input {
-    margin: 0 5px 0 0;
+    margin: 0 5px 0 10px;
 }
+
+
 

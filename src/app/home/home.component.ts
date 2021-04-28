@@ -17,7 +17,18 @@ export class HomeComponent implements OnInit {
   showPlayerNameLabel:boolean = false;
 
    //Array option
-   arrayOfOptions:Array<any> = [{name: '💣', value: '💣', disable: false}, {name: 'O', value: 'O', disable: false}, {name: '🛦', value: '🛦', disable: false}, {name: '☻', value: '☻', disable: false}];
+   arrayOfOptions:Array<any> = [
+     {name: '⭕', value: '⭕', disable: false}, 
+     {name: '❌', value: '❌', disable: false}, 
+     {name: '💣', value: '💣', disable: false}, 
+     {name: '⚓', value: '⚓', disable: false},
+     {name: '💥', value: '💥', disable: false},
+     {name: '🔥', value: '🔥', disable: false},
+     {name: '🛫', value: '🛫', disable: false},
+     {name: '🛦', value: '🛦', disable: false}, 
+     {name: '☻', value: '☻', disable: false}
+    
+    ];
 
   playersArray:Array<any> = [];
 

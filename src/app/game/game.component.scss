@@ -7,13 +7,13 @@
 h1 {
     text-align: center;
     color: #ffe3de;
-    padding: .35em;
+    padding: .45em;
 }
 
 #next-player-text {
     text-align: center;
     color: #ffe3de;
-    padding: 1em;
+    padding: .45em;
 }
 
 .board
@@ -128,10 +128,12 @@ h1 {
     .points {
         flex-direction: column;
         position: absolute;
-        top: 18.3%;
+        top: 17.6%;
+       
         right: 2%;
-        text-align: center;
+        text-align: start;
         margin: 2% 10px;
         width: 20%;
     }
+
 }

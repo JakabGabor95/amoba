@@ -23,11 +23,11 @@
             <tbody class="d-flex flex-d-column">
                 <div class="flex-container">
                 <tr *ngFor = "let player of playersArray">
-                    <td >{{player.playerNumber}}.játékos</td>
+                    <td class="player-td" >{{player.playerNumber}}.játékos</td>
                     <td class="d-flex  mb-3 input-container"> 
                         <input class = 'nameInput' formControlName = '{{player.formControlName}}' type="text" class="" placeholder="Felhasználónév " aria-label="Username" aria-describedby="basic-addon1">
                         <select (change) = "selectedIcon($event.target.value)"  id="firstPalyerselectedIcon" formControlName = "{{player.selectedIcon}}" class="form-select " aria-label="Default select example">
-                           <option [disabled] = "option.disable" *ngFor="let option of arrayOfOptions" [value]="option.value">{{option.name}}</option> 
+                           <option style="color: white;" [disabled] = "option.disable" *ngFor="let option of arrayOfOptions" [value]="option.value">{{option.name}}</option> 
                         </select>
                     </td> 
                     </tr>
