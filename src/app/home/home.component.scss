@@ -4,9 +4,9 @@
     border-radius: 5px;
     padding: 1rem;
     background:   rgba(0, 0, 0, .3);
-    color: white;
+    color: #dbd7d7;
     font-family: 'Londrina Solid', cursive;
-    font-size: 1.4em;
+    font-size: 1.6em;
     box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, .5);
     
 }
@@ -14,12 +14,16 @@
 .game-button {
     background-color: #6ea171;
     color: whitesmoke;
+    font-size: 1.4rem;
+    &:hover {
+       box-shadow: #B2C192 0px 0px 29px 0px;
+    }
 }
 
 select,
 input {
     border: none;
-    background:  #474E40;
+   background:  #474E40;
     color: white;
     font-size: 1em;
    

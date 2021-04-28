@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   showPlayerNameLabel:boolean = false;
 
    //Array option
-   arrayOfOptions:Array<any> = [{name: 'X', value: 'X', disable: false}, {name: 'O', value: 'O', disable: false}, {name: '♥', value: '♥', disable: false}, {name: '☻', value: '☻', disable: false}];
+   arrayOfOptions:Array<any> = [{name: '💣', value: '💣', disable: false}, {name: 'O', value: 'O', disable: false}, {name: '🛦', value: '🛦', disable: false}, {name: '☻', value: '☻', disable: false}];
 
   playersArray:Array<any> = [];
 
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
       //Second player details
       secondPlayerName: new FormControl('', Validators.required),
       secondPalyerselectedIcon: new FormControl('', Validators.required),
-   
+  
       //Third player details
       thirdPlayerName: new FormControl('',),
       thirdPalyerselectedIcon: new FormControl('',),
