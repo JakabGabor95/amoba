@@ -4,43 +4,51 @@
 
     <p id="next-player-text">Let's Start!</p>
 
-    <div class="tic-tac-toe-holder">
+    <div class="game-holder">
+        <div class="tic-tac-toe-holder">
 
-        <div class="board">
-            <!--   <div class="field fieldsSmall" *ngFor="let field of fieldsSmall"></div> -->
-        </div>
+            <div class="board">
+                <!--   <div class="field fieldsSmall" *ngFor="let field of fieldsSmall"></div> -->
+            </div>
 
-        <!--    <div *ngIf="mediumBoard" class="mediumBoard">
+            <!--    <div *ngIf="mediumBoard" class="mediumBoard">
             <div class="field fieldsMedium" *ngFor="let field of fieldsMedium"></div>
 
         </div> -->
-    </div>
+        </div>
 
 
 
-    <div class="points">
-        <div class="col">
-            <p>Player One:
-                <span>{{firstPlayerName}} </span>
-                <p>Player One Score: {{firstPlayerWonCounter}}
+        <div class="points">
+            <div class="col player-holder">
+                <p>Első játékos:
+                    <span>{{firstPlayerName}} </span>
+                <p>Első játékos eredmény: {{firstPlayerWonCounter}}
                     <span id="playerOnePoints"></span>
                 </p>
-        </div>
-        <div class="col">
-            <p>Player Two:
-                <span>{{secondPlayerName}} </span>
-                <p>Player Two Score: {{secondPlayerWonCounter}}
+            </div>
+            <div class="col">
+                <p>Második játékos:
+                    <span>{{secondPlayerName}} </span>
+                <p>Második játékos eredmény: {{secondPlayerWonCounter}}
                     <span id="playerTwoPoints"></span>
                 </p>
+            </div>
+            <div *ngIf = "threePlayerGame" class="col">
+                <p>Harmadik játékos:
+                    <span>{{thirdPlayerName}} </span>
+                <p>Harmadik játékos eredmény: {{thirdPlayerWonCounter}}
+                    <span id="playerTwoPoints"></span>
+                </p>
+            </div>
         </div>
+
     </div>
-
-
 
 
     <div id="winner-box">
         <h1 id="winnerPlayerText"></h1>
-        <button (click) = "createANewSmallGame()" class="btn" id="new-game-btn">Start new Game!</button>
+        <button (click)="createANewSmallGame()" class="btn" id="new-game-btn">Start new Game!</button>
     </div>
 
 </section>

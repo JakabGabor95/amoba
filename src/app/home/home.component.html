@@ -13,7 +13,7 @@
         <select (change) = "howManyPlayers($event.target.value)" id="numberOfPlayers" formControlName = "numberOfPlayers"  class="form-select" aria-label="Default select example">
             <option value="2">2</option>
             <option value="3">3</option>
-            <option value="4">4</option>
+            <!-- <option value="4">4</option> -->
         </select>
     </div>
     
@@ -26,11 +26,8 @@
                     <td >{{player.playerNumber}}.játékos</td>
                     <td class="d-flex  mb-3 input-container"> 
                         <input class = 'nameInput' formControlName = '{{player.formControlName}}' type="text" class="" placeholder="Felhasználónév " aria-label="Username" aria-describedby="basic-addon1">
-                        <select  id="firstPalyerselectedIcon" formControlName = "{{player.selectedIcon}}" class="form-select" aria-label="Default select example">
-                            <option value="X">X</option>
-                            <option value="O">O</option>
-                            <option value="♥">♥</option>
-                            <option value="☻">☻</option>
+                        <select (change) = "selectedIcon($event.target.value)"  id="firstPalyerselectedIcon" formControlName = "{{player.selectedIcon}}" class="form-select " aria-label="Default select example">
+                           <option [disabled] = "option.disable" *ngFor="let option of arrayOfOptions" [value]="option.value">{{option.name}}</option> 
                         </select>
                     </td> 
                     </tr>
@@ -40,6 +37,6 @@
     </div>
 
     <div class="mb-3">
-        <button [disabled] = "amobaForm.invalid"  type="submit" class="btn btn-warning">Játék</button>
+        <button [disabled] = "amobaForm.invalid"  type="submit" class="btn game-button">Játék</button>
     </div>
 </form>

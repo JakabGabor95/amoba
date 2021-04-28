@@ -16,6 +16,9 @@ export class HomeComponent implements OnInit {
   //show label
   showPlayerNameLabel:boolean = false;
 
+   //Array option
+   arrayOfOptions:Array<any> = [{name: 'X', value: 'X', disable: false}, {name: 'O', value: 'O', disable: false}, {name: '♥', value: '♥', disable: false}, {name: '☻', value: '☻', disable: false}];
+
   playersArray:Array<any> = [];
 
   constructor(
@@ -77,19 +80,29 @@ export class HomeComponent implements OnInit {
         playerNumber: 3,
         formControlName: 'thirdPlayerName',
         selectedIcon: 'thirdPalyerselectedIcon'
-      },
-      {
+      }
+      /* {
         playerNumber: 4,
         formControlName: 'fourthPlayerName',
         selectedIcon: 'fourthPalyerselectedIcon'
-      },
+      }, */
     ];
     
 
     for(let i = 0; i < +numberOfThePlayers; i++) {
       this.playersArray.push(arrayOfPlayers[i]);
+
     }
     
+  }
+
+  selectedIcon = (icon:string) => {
+    for(let option of this.arrayOfOptions) {
+      if(option.name === icon) {
+        option.disable = true;
+        
+      }
+    }
   }
 
 }

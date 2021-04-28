@@ -1,13 +1,32 @@
 #amobaForm {
     width: 50%;
     margin: 5% auto;
-    border: 1px solid black;
     border-radius: 5px;
     padding: 1rem;
-    background: #022838;
+    background:   rgba(0, 0, 0, .3);
     color: white;
     font-family: 'Londrina Solid', cursive;
-    font-size: 1.2em;
-
+    font-size: 1.4em;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, .5);
     
 }
+
+.game-button {
+    background-color: #6ea171;
+    color: whitesmoke;
+}
+
+select,
+input {
+    border: none;
+    background:  #474E40;
+    color: white;
+    font-size: 1em;
+   
+
+}
+
+input {
+    margin: 0 5px 0 0;
+}
+
