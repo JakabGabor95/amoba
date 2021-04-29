@@ -1,19 +1,22 @@
+*,
+html,
+body {
+    user-select: none;
+}
+
 .game {
-    font-family: 'Londrina Solid', cursive;
+    font-family: 'Galindo', cursive;
     color: #ffe3de;
     height: 100%;
 }
 
-h1 {
-    text-align: center;
-    color: #ffe3de;
-    padding: .45em;
-}
+
 
 #next-player-text {
     text-align: center;
     color: #ffe3de;
-    padding: .45em;
+    padding: .30em;
+    font-size: 1.5em;
 }
 
 .board
@@ -25,12 +28,14 @@ h1 {
     flex-wrap: wrap;
     background: rgba(0, 0, 0, 0.7);
     box-shadow: #B2C192 0px 0px 29px 0px;
+    font-size: 3rem;
 }
 
 .fieldsSmall {
     width: 33.3%;
     height: 33.3%;
     border: 3px solid #ffe3de;
+    font-size: 6rem;
 }
 
 .fieldsMedium {
@@ -65,12 +70,12 @@ h1 {
 .points {
     color: #ffe3de;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 1em 1em 1em 0;
     width: 90%;
     margin: 3% auto;
     background: rgba(0, 0, 0, 0.7);
-    box-shadow: #B2C192 0px 0px 29px 0px;
+    box-shadow: #B2C192 0px 0px 29px 0px; 
     padding: 1rem;
 }
 
@@ -113,32 +118,62 @@ h1 {
 
 }
 
+#next-player-text {
+    padding: 1.5rem;
+}
+
+.tic-tac-toe-holder {
+    p {
+        font-family: 'Galindo', cursive;
+    }
+}
 
 
 @media only screen and (min-width: 765px) {
    .board {
         height: 600px;
         width: 80%;
+        font-size: 4.5rem;
+        
     }
     .points {
         width: 80%;
     }
+    
 }
 
 @media only screen and (min-width: 1200px) {
     .board {
-        height: 700px;
-        width: 50%;
+       height: 700px;
+        width: 70%;
+        font-size: 6rem;
     }
     .points {
         flex-direction: column;
-        position: absolute;
-        top: 17.6%;
-       
-        right: 2%;
-        text-align: start;
-        margin: 2% 10px;
-        width: 20%;
+        height: 700px;
+        width: 100%;
+        background: none;
+        box-shadow: none; 
+        margin-top: 6rem;
+        
     }
+
+    .game-holder {
+        margin: 0 auto;
+        width: 80%;
+        display: grid;
+        grid-template-columns: 5fr 2fr;
+       
+    }
+
+    .player-box {
+        background: rgba(0, 0, 0, 0.7);
+        box-shadow: #B2C192 0px 0px 29px 0px; 
+        padding: 2rem;
+        font-size: 1.2rem;
+      
+       
+    }
+  
 
 }

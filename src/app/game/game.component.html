@@ -1,54 +1,53 @@
 <section class="game">
 
-    <h1>Tic Tac Toe</h1>
 
-    <p id="next-player-text">Let's Start!</p>
+  
 
     <div class="game-holder">
         <div class="tic-tac-toe-holder">
-
+            <p *ngIf = "threePlayerGame" id="next-player-text">{{secondPlayerName}} kezdi a játékot! </p>
+            <p *ngIf = "!threePlayerGame" id="next-player-text">{{firstPlayerName}} kezdi a játékot!</p>
             <div class="board">
-                <!--   <div class="field fieldsSmall" *ngFor="let field of fieldsSmall"></div> -->
+              
             </div>
-
-            <!--    <div *ngIf="mediumBoard" class="mediumBoard">
-            <div class="field fieldsMedium" *ngFor="let field of fieldsMedium"></div>
-
-        </div> -->
+        
         </div>
 
 
-
         <div class="points">
-            <div class="col player-holder">
+            <div class=" player-box ">
                 <p>Első játékos:
                     <span>{{firstPlayerName}} </span>
                 <p>Első játékos eredmény: {{firstPlayerWonCounter}}
                     <span id="playerOnePoints"></span>
                 </p>
+                <p>Játékos ikon: {{playersObject.firstPalyerselectedIcon}}</p>
             </div>
-            <div class="col">
+            <div class="  player-box" >
                 <p>Második játékos:
                     <span>{{secondPlayerName}} </span>
                 <p>Második játékos eredmény: {{secondPlayerWonCounter}}
                     <span id="playerTwoPoints"></span>
                 </p>
+                <p>Játékos ikon: {{playersObject.secondPalyerselectedIcon}}</p>
             </div>
-            <div *ngIf = "threePlayerGame" class="col">
+            <div *ngIf = "threePlayerGame" class="  player-box">
                 <p>Harmadik játékos:
                     <span>{{thirdPlayerName}} </span>
                 <p>Harmadik játékos eredmény: {{thirdPlayerWonCounter}}
                     <span id="playerTwoPoints"></span>
                 </p>
+                <p>Játékos ikon: {{playersObject.thirdPalyerselectedIcon}}</p>
             </div>
         </div>
+
 
     </div>
 
 
     <div id="winner-box">
         <h1 id="winnerPlayerText"></h1>
-        <button (click)="createNewGame()" class="btn" id="new-game-btn">Start new Game!</button>
+        <button (click)="createNewGame()" class="btn" id="new-game-btn">Új játék!</button>
     </div>
 
 </section>

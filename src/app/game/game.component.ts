@@ -73,7 +73,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.mapSizeService.mapSize.subscribe(
-      (playersObj) => {console.log(playersObj)
+      (playersObj) => {
         if(playersObj.map === 'small') {
           this.createSmallBoard(playersObj);
           this.playersObject = playersObj;
@@ -101,7 +101,7 @@ export class GameComponent implements OnInit {
           this.whoIsTheNextPlayer = [this.firstPlayerName, this.secondPlayerName, this.thirdPlayerName];
           this.currentPlayer = this.firstPlayerName;
           
-          console.log(this.currentPlayer);
+    
         }
 
       },
@@ -117,6 +117,8 @@ export class GameComponent implements OnInit {
       this.createANewSmallGame()
     }else if(this.playersObject.map === "medium") {
       this.createANewMediumGame();
+    }else if(this.playersObject.map === 'large') {
+      this.createANewLargeGame();
     }
   } 
 
@@ -157,14 +159,15 @@ export class GameComponent implements OnInit {
   
       this.fieldsSmall[index] = this.firstPlayerTurn ? playersObj.firstPalyerselectedIcon : playersObj.secondPalyerselectedIcon;
       this.fieldsMedium[index] = this.firstPlayerTurn ? playersObj.firstPalyerselectedIcon : playersObj.secondPalyerselectedIcon;
+      this.fieldsLarge[index] = this.firstPlayerTurn ? playersObj.firstPalyerselectedIcon : playersObj.secondPalyerselectedIcon;
   
       if (this.firstPlayerTurn) {
         this.fieldsOfFirstPlayer.push(index + 1);
-        nextTurnText.innerText = `Next player: ${playersObj.secondPlayerName} `
+        nextTurnText.innerText = `Következő játékos: ${playersObj.secondPlayerName} ${playersObj.secondPalyerselectedIcon} `
         
       } else {
         this.fieldsOfSecondPlayer.push(index + 1);
-        nextTurnText.innerText = `Next player: ${playersObj.firstPlayerName} `
+        nextTurnText.innerText = `Következő játékos: ${playersObj.firstPlayerName} ${playersObj.firstPalyerselectedIcon} `
       }
     }
 
@@ -178,11 +181,11 @@ export class GameComponent implements OnInit {
       if(this.indexOfPlayersArray <= this.whoIsTheNextPlayer.length-2) {
         this.indexOfPlayersArray += 1;
         this.currentPlayer = this.whoIsTheNextPlayer[this.indexOfPlayersArray];
-        console.log(this.currentPlayer);
+       
       }else {
         this.indexOfPlayersArray = 0;
         this.currentPlayer = this.whoIsTheNextPlayer[this.indexOfPlayersArray];
-        console.log(this.currentPlayer);
+      
       }
   
       //Add icon to field
@@ -191,21 +194,30 @@ export class GameComponent implements OnInit {
         field.innerText = playersObj.firstPalyerselectedIcon;
         //Small map
         this.fieldsSmall[index] = playersObj.firstPalyerselectedIcon;
+        
         //Medium map
         this.fieldsMedium[index] = playersObj.firstPalyerselectedIcon;
 
+        //Large map
+        this.fieldsLarge[index] = playersObj.firstPalyerselectedIcon;
+
         this.fieldsOfFirstPlayer.push(index + 1);
-        nextTurnText.innerText = `Next player: ${playersObj.secondPlayerName} `
+        nextTurnText.innerText = `Következő játékos: ${playersObj.secondPlayerName} ${playersObj.secondPalyerselectedIcon} `
       }
       //second player
       else if(this.currentPlayer === playersObj.secondPlayerName) {
         field.innerText = playersObj.secondPalyerselectedIcon
         //Small map
         this.fieldsSmall[index] = playersObj.secondPalyerselectedIcon;
+       
         //Medium map
         this.fieldsMedium[index] = playersObj.secondPalyerselectedIcon;
+
+        //Large map
+        this.fieldsLarge[index] = playersObj.secondPalyerselectedIcon;
+        
         this.fieldsOfSecondPlayer.push(index + 1);
-        nextTurnText.innerText = `Next player: ${playersObj.thirdPlayerName} `
+        nextTurnText.innerText = `Következő játékos: ${playersObj.thirdPlayerName} ${playersObj.thirdPalyerselectedIcon} `
       }
       //third player
       else if(this.currentPlayer === playersObj.thirdPlayerName) {
@@ -214,8 +226,12 @@ export class GameComponent implements OnInit {
         this.fieldsSmall[index] = playersObj.thirdPalyerselectedIcon;
         //Medium map
         this.fieldsMedium[index] = playersObj.thirdPalyerselectedIcon;
+
+        //Large map
+        this.fieldsLarge[index] = playersObj.thirdPalyerselectedIcon;
+
         this.fieldsOfThirdPlayer.push(index + 1);
-        nextTurnText.innerText = `Next player: ${playersObj.firstPlayerName} `
+        nextTurnText.innerText = `Következő játékos: ${playersObj.firstPlayerName} ${playersObj.firstPalyerselectedIcon} `
       }
 
    
@@ -237,7 +253,7 @@ export class GameComponent implements OnInit {
       winnerBox.classList.add("winner-box");
       newGameBtn.style.display = 'block';
       firstPlayerWonText.style.display = "block";
-      firstPlayerWonText.innerText = `${this.firstPlayerName} WON`;
+      firstPlayerWonText.innerText = `${this.firstPlayerName} NYERT`;
       this.firstPlayerWonCounter++;
       this.firstPlayerTurn = true;
     }
@@ -267,7 +283,7 @@ export class GameComponent implements OnInit {
       winnerBox.classList.add("winner-box");
       newGameBtn.style.display = 'block';
       secondPlayerWonText.style.display = "block";
-      secondPlayerWonText.innerText = `${this.secondPlayerName} WON`;
+      secondPlayerWonText.innerText = `${this.secondPlayerName} NYERT`;
       this.secondPlayerWonCounter++;
       this.firstPlayerTurn = false;
     }
@@ -332,7 +348,7 @@ export class GameComponent implements OnInit {
       winnerBox.classList.add("winner-box");
       newGameBtn.style.display = 'block';
       drawText.style.display = "block";
-      drawText.innerText = 'Draw';
+      drawText.innerText = 'Döntetlen';
     }
 
     if(!this.threePlayerGame) {
@@ -374,11 +390,11 @@ export class GameComponent implements OnInit {
 
       fieldSmallDiv.setAttribute('class', 'field fieldsSmall');
 
-      fieldSmallDiv.style.border = "3px solid #ffe3ded2";
+      fieldSmallDiv.style.border = "2px solid #ffe3ded2";
       fieldSmallDiv.style.width = "33.3%";
       fieldSmallDiv.style.height = "33.3%";
       fieldSmallDiv.style.color = "#ffe3ded2";
-      fieldSmallDiv.style.fontSize = "6rem";
+      fieldSmallDiv.style.fontSize = "1em";
       fieldSmallDiv.style.display = "flex";
       fieldSmallDiv.style.justifyContent = "center";
       fieldSmallDiv.style.alignItems = "center";
@@ -441,7 +457,7 @@ export class GameComponent implements OnInit {
       }
     }
 
-    console.log(this.fieldsSmall);
+   
   }
   
   
@@ -463,6 +479,9 @@ export class GameComponent implements OnInit {
       this.fieldsOfSecondPlayer = [];
       this.fieldsOfThirdPlayer = [];
       this.fieldsSmall = Array(9).fill(0);
+      this.fieldsSmall = Array(9).fill(0);
+      this.fieldsMedium = Array(25).fill(0);
+      this.fieldsLarge = Array(100).fill(0);
      
      
       allFields.forEach(field => {
@@ -492,11 +511,11 @@ export class GameComponent implements OnInit {
   
         fieldMediumDiv.setAttribute('class', 'field fieldsMedium');
   
-        fieldMediumDiv.style.border = "3px solid #ffe3ded2";
+        fieldMediumDiv.style.border = "2px solid #ffe3ded2";
         fieldMediumDiv.style.width = "20%";
         fieldMediumDiv.style.height = "20%";
         fieldMediumDiv.style.color = "#ffe3ded2";
-        fieldMediumDiv.style.fontSize = "6rem";
+        fieldMediumDiv.style.fontSize = "1em";
         fieldMediumDiv.style.display = "flex";
         fieldMediumDiv.style.justifyContent = "center";
         fieldMediumDiv.style.alignItems = "center";
@@ -536,8 +555,6 @@ export class GameComponent implements OnInit {
      chancesOfWinningMediumBoard(playersObject:any) {
 
       let chunkedArray = this.chunkArray(this.fieldsMedium, 5)
-       console.log(this.fieldsMedium);
-      console.log(chunkedArray);
 
       //Horizontal winning chance
       let horizontalWinningChance = (selectedIcon, x) => {
@@ -575,11 +592,11 @@ export class GameComponent implements OnInit {
 
     
       //Horizontal 
-      //First player
       for (let x = 0; x < chunkedArray.length; x++) {
-
+        
+        //First player
         if(horizontalWinningChance(playersObject.firstPalyerselectedIcon, x)) {
-          console.log('firstPlayer won')
+        
           this.winnerFirstPlayer = true;
           this.winnerFirstPlayerMediumBoard = true;
         }
@@ -588,7 +605,7 @@ export class GameComponent implements OnInit {
 
 
         if(horizontalWinningChance(playersObject.secondPalyerselectedIcon, x)) {
-          console.log('secondPlayer won')
+       
           this.winnerSecondPlayer = true;
           this.winnerSecondPlayerMediumBoard = true;
         }
@@ -599,24 +616,24 @@ export class GameComponent implements OnInit {
 
 
         if(horizontalWinningChance(playersObject.thirdPalyerselectedIcon, x)) {
-          console.log('thirdPlayer won')
+      
           this.winnerThirdPlayer = true;
           this.winnerThirdPlayerMediumBoard = true;
         }
   
         //Vertical
-        //First player
         for(let i = 0; i < 5; i++) {
- 
+          
+          //First player
              if(verticalWinningChance(playersObject.firstPalyerselectedIcon, i)) {
-              console.log('firstPlayer won')
+           
               this.winnerFirstPlayer = true;
               this.winnerFirstPlayerMediumBoard = true;
              }
           //Second player 
 
              if(verticalWinningChance(playersObject.secondPalyerselectedIcon, i)) {
-              console.log('secondPlayer won')
+          
               this.winnerSecondPlayer = true;
               this.winnerSecondPlayerMediumBoard = true;
              }
@@ -625,7 +642,7 @@ export class GameComponent implements OnInit {
   
 
               if(verticalWinningChance(playersObject.thirdPalyerselectedIcon, i)) {
-                console.log('thirdPlayer won')
+              
                 this.winnerThirdPlayer = true;
                 this.winnerThirdPlayerMediumBoard = true;
                }
@@ -633,18 +650,18 @@ export class GameComponent implements OnInit {
 
   
         //Diagonal
-        //First player
         for(let y = 0; y < 3; y++) {
-
+          
+          //First player
              if(diagonalWinningChance(playersObject.firstPalyerselectedIcon, y)) {
-              console.log('firstPlayer won')
+            
               this.winnerFirstPlayer = true;
               this.winnerFirstPlayerMediumBoard = true;
              }
            //Second player
 
               if(diagonalWinningChance(playersObject.secondPalyerselectedIcon, y)) {
-                console.log('secondPlayer won')
+              
                 this.winnerSecondPlayer = true;
                 this.winnerSecondPlayerMediumBoard = true;
                }
@@ -652,7 +669,7 @@ export class GameComponent implements OnInit {
                //Third player  
                 
               if(diagonalWinningChance(playersObject.thirdPalyerselectedIcon, y)) {
-                console.log('thirdPlayer won')
+           
                 this.winnerThirdPlayer = true;
                 this.winnerThirdPlayerMediumBoard = true;
                }
@@ -680,6 +697,7 @@ export class GameComponent implements OnInit {
         this.winnerThirdPlayerMediumBoard = false;
         this.fieldsSmall = Array(9).fill(0);
         this.fieldsMedium = Array(25).fill(0);
+        this.fieldsLarge = Array(100).fill(0);
        
        
         allFields.forEach(field => {
@@ -714,15 +732,17 @@ export class GameComponent implements OnInit {
   
         fieldLargeDiv.setAttribute('class', 'field fieldsLarge');
   
-        fieldLargeDiv.style.border = "3px solid #ffe3ded2";
+        
         fieldLargeDiv.style.width = "10%";
         fieldLargeDiv.style.height = "10%";
         fieldLargeDiv.style.color = "#ffe3ded2";
-        fieldLargeDiv.style.fontSize = "3rem";
+        fieldLargeDiv.style.fontSize = ".5em";
         fieldLargeDiv.style.display = "flex";
         fieldLargeDiv.style.justifyContent = "center";
         fieldLargeDiv.style.alignItems = "center";
         fieldLargeDiv.style.cursor = "pointer";
+        fieldLargeDiv.style.border = "1px solid #ffe3ded2";
+       
   
         
         fieldLargeDiv.addEventListener('click', () => {
@@ -731,7 +751,7 @@ export class GameComponent implements OnInit {
           fieldLargeDiv.style.pointerEvents = 'none';
   
           //chances of winning
-          this.chancesOfWinningMediumBoard(playersObject);
+          this.chancesOfWinningLargeBoard(playersObject);
   
           //Who is the winner?
           if(!this.threePlayerGame) {
@@ -753,6 +773,207 @@ export class GameComponent implements OnInit {
   
       });
     }
+
+    chancesOfWinningLargeBoard = (playersObject:any) => {
+      let chunkedArray = this.chunkArray(this.fieldsLarge, 10);
+ 
+      //Horizontal winning chance
+      let horizontalWinningChance = (selectedIcon, x) => {
+        return chunkedArray[x][0] === selectedIcon && chunkedArray[x][1] === selectedIcon && chunkedArray[x][2] === selectedIcon && chunkedArray[x][3] === selectedIcon && chunkedArray[x][4] === selectedIcon ||
+              chunkedArray[x][1] === selectedIcon && chunkedArray[x][2] === selectedIcon && chunkedArray[x][3] === selectedIcon && chunkedArray[x][4] === selectedIcon && chunkedArray[x][5] === selectedIcon||
+              chunkedArray[x][2] === selectedIcon && chunkedArray[x][3] === selectedIcon && chunkedArray[x][4] === selectedIcon && chunkedArray[x][5] === selectedIcon && chunkedArray[x][6] === selectedIcon ||
+              chunkedArray[x][3] === selectedIcon && chunkedArray[x][4] === selectedIcon && chunkedArray[x][5] === selectedIcon && chunkedArray[x][6] === selectedIcon && chunkedArray[x][7] === selectedIcon ||
+              chunkedArray[x][4] === selectedIcon && chunkedArray[x][5] === selectedIcon && chunkedArray[x][6] === selectedIcon && chunkedArray[x][7] === selectedIcon && chunkedArray[x][8] === selectedIcon ||
+              chunkedArray[x][5] === selectedIcon && chunkedArray[x][6] === selectedIcon && chunkedArray[x][7] === selectedIcon && chunkedArray[x][8] === selectedIcon && chunkedArray[x][9] === selectedIcon 
+            
+      }
+
+        
+      //Vertical winning chance
+
+      let verticalWinningChance = (selectedIcon, y) => {
+        return chunkedArray[0][y] === selectedIcon && chunkedArray[1][y] === selectedIcon && chunkedArray[2][y] === selectedIcon && chunkedArray[3][y] === selectedIcon && chunkedArray[4][y] === selectedIcon ||
+                chunkedArray[1][y] === selectedIcon && chunkedArray[2][y] === selectedIcon && chunkedArray[3][y] === selectedIcon && chunkedArray[4][y] === selectedIcon&& chunkedArray[5][y] === selectedIcon ||
+                chunkedArray[2][y] === selectedIcon && chunkedArray[3][y] === selectedIcon && chunkedArray[4][y] === selectedIcon && chunkedArray[5][y] === selectedIcon && chunkedArray[6][y] === selectedIcon ||
+                chunkedArray[3][y] === selectedIcon && chunkedArray[4][y] === selectedIcon && chunkedArray[5][y] === selectedIcon && chunkedArray[6][y] === selectedIcon && chunkedArray[7][y] === selectedIcon ||
+                chunkedArray[4][y] === selectedIcon && chunkedArray[5][y] === selectedIcon && chunkedArray[6][y] === selectedIcon && chunkedArray[7][y] === selectedIcon && chunkedArray[8][y] === selectedIcon ||
+                chunkedArray[5][y] === selectedIcon && chunkedArray[6][y] === selectedIcon && chunkedArray[7][y] === selectedIcon && chunkedArray[8][y] === selectedIcon && chunkedArray[9][y] === selectedIcon 
+      }
+
+      //Diagonal winning chance
+      let diagonalWinningChance = (selectedIcon, row) => {
+        return  chunkedArray[row][0] === selectedIcon && chunkedArray[row+1][1] === selectedIcon && chunkedArray[row+2][2] === selectedIcon && chunkedArray[row+3][3] === selectedIcon && chunkedArray[row+4][4] === selectedIcon||
+        chunkedArray[row][1] === selectedIcon && chunkedArray[row+1][2] === selectedIcon && chunkedArray[row+2][3] === selectedIcon && chunkedArray[row+3][4] === selectedIcon && chunkedArray[row+4][5] === selectedIcon ||
+        chunkedArray[row][2] === selectedIcon && chunkedArray[row+1][3] === selectedIcon && chunkedArray[row+2][4] === selectedIcon && chunkedArray[row+3][5] === selectedIcon && chunkedArray[row+4][6] === selectedIcon ||
+        chunkedArray[row][3] === selectedIcon && chunkedArray[row+1][4] === selectedIcon && chunkedArray[row+2][5] === selectedIcon && chunkedArray[row+3][6] === selectedIcon && chunkedArray[row+4][7] === selectedIcon ||
+        chunkedArray[row][4] === selectedIcon && chunkedArray[row+1][5] === selectedIcon && chunkedArray[row+2][6] === selectedIcon && chunkedArray[row+3][7] === selectedIcon && chunkedArray[row+4][8] === selectedIcon ||
+        chunkedArray[row][5] === selectedIcon && chunkedArray[row+1][6] === selectedIcon && chunkedArray[row+2][7] === selectedIcon && chunkedArray[row+3][8] === selectedIcon && chunkedArray[row+4][9] === selectedIcon 
+      }
+
+      let diagonalWinningChanceReverse = (selectedIcon, row) => {
+        return chunkedArray[row][0] === selectedIcon && chunkedArray[row-1][1] === selectedIcon && chunkedArray[row-2][2] === selectedIcon && chunkedArray[row-3][3] === selectedIcon && chunkedArray[row-4][4] === selectedIcon||
+        chunkedArray[row][1] === selectedIcon && chunkedArray[row-1][2] === selectedIcon && chunkedArray[row-2][3] === selectedIcon && chunkedArray[row-3][4] === selectedIcon && chunkedArray[row-4][5] === selectedIcon ||
+        chunkedArray[row][2] === selectedIcon && chunkedArray[row-1][3] === selectedIcon && chunkedArray[row-2][4] === selectedIcon && chunkedArray[row-3][5] === selectedIcon && chunkedArray[row-4][6] === selectedIcon ||
+        chunkedArray[row][3] === selectedIcon && chunkedArray[row-1][4] === selectedIcon && chunkedArray[row-2][5] === selectedIcon && chunkedArray[row-3][6] === selectedIcon && chunkedArray[row-4][7] === selectedIcon ||
+        chunkedArray[row][4] === selectedIcon && chunkedArray[row-1][5] === selectedIcon && chunkedArray[row-2][6] === selectedIcon && chunkedArray[row-3][7] === selectedIcon && chunkedArray[row-4][8] === selectedIcon ||
+        chunkedArray[row][5] === selectedIcon && chunkedArray[row-1][6] === selectedIcon && chunkedArray[row-2][7] === selectedIcon && chunkedArray[row-3][8] === selectedIcon && chunkedArray[row-4][9] === selectedIcon
+      }
+
+    
+
+     //Horizontal 
+      //First player
+      for (let x = 0; x < chunkedArray.length; x++) {
+        if(horizontalWinningChance(playersObject.firstPalyerselectedIcon, x)) {
+        
+            this.winnerFirstPlayer = true;
+            this.winnerFirstPlayerMediumBoard = true;
+        }
+       
+        
+
+      //Second player
+      if(horizontalWinningChance(playersObject.secondPalyerselectedIcon, x)) {
+      
+        this.winnerSecondPlayer = true;
+        this.winnerSecondPlayerMediumBoard = true;
+      }
+
+       
+
+
+      
+       //Third player  
+       if(horizontalWinningChance(playersObject.thirdPalyerselectedIcon, x)) {
+     
+        this.winnerThirdPlayer = true;
+        this.winnerThirdPlayerMediumBoard = true;
+        }
+
+       
+        //Vertical
+        for(let i = 0; i < 10; i++) {
+          //First player
+         if(verticalWinningChance(playersObject.firstPalyerselectedIcon, i))  {
+        
+            this.winnerFirstPlayer = true;
+            this.winnerFirstPlayerMediumBoard = true;
+          }
+            
+          //Second player 
+          if(verticalWinningChance(playersObject.secondPalyerselectedIcon, i)) {
+          
+            this.winnerSecondPlayer = true;
+            this.winnerSecondPlayerMediumBoard = true;
+          }
+            
+
+             //Third player  
+             if(verticalWinningChance(playersObject.thirdPalyerselectedIcon, i)) {
+              
+              this.winnerThirdPlayer = true;
+              this.winnerThirdPlayerMediumBoard = true;
+            }
+  
+
+        }
+
+  
+        //Diagonal
+
+        for(let row = 0; row < chunkedArray.length-4; row++) {
+          //First player
+         if(diagonalWinningChance(playersObject.firstPalyerselectedIcon,row))
+            {
+           
+              this.winnerFirstPlayer = true;
+              this.winnerFirstPlayerMediumBoard = true;
+            }
+            
+          //Second player
+         if(diagonalWinningChance(playersObject.secondPalyerselectedIcon,row))
+            {
+         
+              this.winnerSecondPlayer = true;
+              this.winnerSecondPlayerMediumBoard = true;
+            }
+
+          //Third player   
+          if(diagonalWinningChance(playersObject.thirdPalyerselectedIcon,row))
+          {
+          
+            this.winnerThirdPlayer = true;
+            this.winnerThirdPlayerMediumBoard = true;
+          }
+        }
+       
+        for(let line = 4; line < chunkedArray.length; line++) {
+           //First player
+         if(diagonalWinningChanceReverse(playersObject.firstPalyerselectedIcon,line))
+            {
+             
+              this.winnerFirstPlayer = true;
+              this.winnerFirstPlayerMediumBoard = true;
+            }
+      
+        //Second player
+         if(diagonalWinningChanceReverse(playersObject.secondPalyerselectedIcon,line))
+            {
+            
+              this.winnerSecondPlayer = true;
+              this.winnerSecondPlayerMediumBoard = true;
+            }
+       //Third player 
+            if(diagonalWinningChanceReverse(playersObject.thirdPalyerselectedIcon,line))
+            {
+            
+              this.winnerThirdPlayer = true;
+              this.winnerThirdPlayerMediumBoard = true;
+            }
+          
+        }
+
+      }
+     
+    }
+
+    createANewLargeGame() {
+      const winnerText = document.getElementById("winnerPlayerText");
+      const winnerBox = document.getElementById("winner-box");
+      let allFields = document.querySelectorAll('.fieldsLarge');
+      const newGameBtn = document.getElementById('new-game-btn');
+      
+        this.gameIsOver = false;
+        this.winnerFirstPlayer = false;
+        this.winnerSecondPlayer = false;
+        this.winnerThirdPlayer = false;
+        this.fieldsOfFirstPlayer = [];
+        this.fieldsOfFirstPlayer = [];
+        this.fieldsOfThirdPlayer = [];
+        this.winnerFirstPlayerMediumBoard = false;
+        this.winnerSecondPlayerMediumBoard = false;
+        this.winnerThirdPlayerMediumBoard = false;
+        this.fieldsSmall = Array(9).fill(0);
+        this.fieldsMedium = Array(25).fill(0);
+        this.fieldsLarge = Array(100).fill(0);
+       
+       
+        allFields.forEach(field => {
+          field.innerHTML = '';
+        
+          ((field) as HTMLElement).style.pointerEvents = 'auto';
+        }) 
+       
+      
+        newGameBtn.style.display = 'none';
+        winnerText.style.display = "none";
+        winnerBox.classList.remove("winner-box");
+      
+
+  
+  }
+    
+    
 
     //-----------------Large Board Creating END----------------------
 

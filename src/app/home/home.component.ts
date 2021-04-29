@@ -53,9 +53,6 @@ export class HomeComponent implements OnInit {
       thirdPlayerName: new FormControl('',),
       thirdPalyerselectedIcon: new FormControl('',),
 
-      //Fourth player details
-      fourthPlayerName: new FormControl('', ),
-      fourthPalyerselectedIcon: new FormControl('',),
     })
   }
 
@@ -92,11 +89,7 @@ export class HomeComponent implements OnInit {
         formControlName: 'thirdPlayerName',
         selectedIcon: 'thirdPalyerselectedIcon'
       }
-      /* {
-        playerNumber: 4,
-        formControlName: 'fourthPlayerName',
-        selectedIcon: 'fourthPalyerselectedIcon'
-      }, */
+  
     ];
     
 
