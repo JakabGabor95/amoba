@@ -65,7 +65,6 @@ export class HomeComponent implements OnInit {
     this.mapSizeService.mapSize.next(amobaFormValues);
     this.router.navigate(['game']);
 
-    console.log(amobaFormValues);
 
   }
 

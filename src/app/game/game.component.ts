@@ -106,6 +106,7 @@ export class GameComponent implements OnInit {
 
       },
       (err) => {console.log(err)},
+      () => {}
     )
   }
 

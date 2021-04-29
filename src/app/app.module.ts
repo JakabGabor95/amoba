@@ -8,7 +8,7 @@ import { GameComponent } from './game/game.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { NavComponent } from './nav/nav.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SelectedPlayerComponent } from './components/selected-player/selected-player.component';
+
 
 
 @NgModule({
@@ -18,12 +18,12 @@ import { SelectedPlayerComponent } from './components/selected-player/selected-p
     GameComponent,
     PagenotfoundComponent,
     NavComponent,
-    SelectedPlayerComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
