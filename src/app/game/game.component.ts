@@ -223,30 +223,25 @@ export class GameComponent implements OnInit {
     const newGameBtn = document.getElementById('new-game-btn');
     const winnerBox = document.getElementById("winner-box");
 
-    for(let chance of this.chanceOfWinning) {
-      if(chance.every(boxes => this.fieldsOfFirstPlayer.includes(boxes))) {
-        this.winnerFirstPlayer = true;
-        this.setPointerEvents('none');
-        winnerBox.classList.add("winner-box");
-        newGameBtn.style.display = 'block';
-        firstPlayerWonText.style.display = "block";
-        firstPlayerWonText.innerText = `${this.firstPlayerName} WON`;
-        this.firstPlayerWonCounter++;
-        this.firstPlayerTurn = true;
-        console.log('first won')
-      }
-    }
-
-    if(this.winnerFirstPlayerMediumBoard) {
+    let setStyleAndWonCounter = () => {
       this.winnerFirstPlayer = true;
       this.setPointerEvents('none');
       winnerBox.classList.add("winner-box");
       newGameBtn.style.display = 'block';
       firstPlayerWonText.style.display = "block";
       firstPlayerWonText.innerText = `${this.firstPlayerName} WON`;
-      this.firstPlayerTurn = true;
       this.firstPlayerWonCounter++;
-      console.log('first won')
+      this.firstPlayerTurn = true;
+    }
+
+    for(let chance of this.chanceOfWinning) {
+      if(chance.every(boxes => this.fieldsOfFirstPlayer.includes(boxes))) {
+        setStyleAndWonCounter();
+      }
+    }
+
+    if(this.winnerFirstPlayerMediumBoard) {
+        setStyleAndWonCounter();
     }
 
   }
@@ -258,22 +253,7 @@ export class GameComponent implements OnInit {
     const newGameBtn = document.getElementById('new-game-btn');
     const winnerBox = document.getElementById("winner-box");
 
-    for(let chance of this.chanceOfWinning) {
-      if(chance.every(boxes => this.fieldsOfSecondPlayer.includes(boxes))) {
-        this.winnerSecondPlayer = true;
-        this.setPointerEvents('none');
-        winnerBox.classList.add("winner-box");
-        newGameBtn.style.display = 'block';
-        secondPlayerWonText.style.display = "block";
-        secondPlayerWonText.innerText = `${this.secondPlayerName} WON`;
-        this.secondPlayerWonCounter++;
-        this.firstPlayerTurn = false;
-
-        console.log('second won')
-      }
-    }
-
-    if(this.winnerSecondPlayerMediumBoard) {
+    let setStyleAndWonCounter = () => {
       this.winnerSecondPlayer = true;
       this.setPointerEvents('none');
       winnerBox.classList.add("winner-box");
@@ -282,6 +262,18 @@ export class GameComponent implements OnInit {
       secondPlayerWonText.innerText = `${this.secondPlayerName} WON`;
       this.secondPlayerWonCounter++;
       this.firstPlayerTurn = false;
+    }
+
+    for(let chance of this.chanceOfWinning) {
+      if(chance.every(boxes => this.fieldsOfSecondPlayer.includes(boxes))) {
+        setStyleAndWonCounter();
+
+      
+      }
+    }
+
+    if(this.winnerSecondPlayerMediumBoard) {
+      setStyleAndWonCounter();
 
     }
 
@@ -294,30 +286,28 @@ export class GameComponent implements OnInit {
     const newGameBtn = document.getElementById('new-game-btn');
     const winnerBox = document.getElementById("winner-box");
 
-    for(let chance of this.chanceOfWinning) {
-      if(chance.every(boxes => this.fieldsOfThirdPlayer.includes(boxes))) {
-        this.winnerThirdPlayer = true;
-        this.setPointerEvents('none');
-        winnerBox.classList.add("winner-box");
-        newGameBtn.style.display = 'block';
-        thirdPlayerWonText.style.display = "block";
-        thirdPlayerWonText.innerText = `${this.thirdPlayerName} WON`;
-        this.thirdPlayerWonCounter++;
-        this.firstPlayerTurn = false;
-
-        console.log('third won')
-      }
-    }
-
-    if(this.winnerThirdPlayerMediumBoard) {
+    let setStyleAndWonCounter = () => {
       this.winnerThirdPlayer = true;
       this.setPointerEvents('none');
       winnerBox.classList.add("winner-box");
       newGameBtn.style.display = 'block';
       thirdPlayerWonText.style.display = "block";
-      thirdPlayerWonText.innerText = `${this.thirdPlayerName} WON`;
+      thirdPlayerWonText.innerText = `${this.thirdPlayerName} NYERT`;
       this.thirdPlayerWonCounter++;
       this.firstPlayerTurn = false;
+    }
+
+    for(let chance of this.chanceOfWinning) {
+      if(chance.every(boxes => this.fieldsOfThirdPlayer.includes(boxes))) {
+ 
+        setStyleAndWonCounter();
+
+      }
+    }
+
+    if(this.winnerThirdPlayerMediumBoard) {
+ 
+      setStyleAndWonCounter();
 
     }
   }
@@ -329,39 +319,33 @@ export class GameComponent implements OnInit {
     const newGameBtn = document.getElementById('new-game-btn');
     const winnerBox = document.getElementById("winner-box");
 
+    let setStyle = () => {
+      this.setPointerEvents('none');
+      winnerBox.classList.add("winner-box");
+      newGameBtn.style.display = 'block';
+      drawText.style.display = "block";
+      drawText.innerText = 'Draw';
+    }
+
     if(!this.threePlayerGame) {
 
       if (!this.gameIsOver && !this.fieldsSmall.includes(0) && !this.winnerFirstPlayer && !this.winnerSecondPlayer) {
-        this.setPointerEvents('none');
-        winnerBox.classList.add("winner-box");
-        newGameBtn.style.display = 'block';
-        drawText.style.display = "block";
-        drawText.innerText = 'Draw';
+        setStyle();
       } 
       
       if (!this.gameIsOver && !this.fieldsMedium.includes(0) && !this.winnerFirstPlayer && !this.winnerSecondPlayer) {
-        this.setPointerEvents('none');
-        winnerBox.classList.add("winner-box");
-        newGameBtn.style.display = 'block';
-        drawText.style.display = "block";
-        drawText.innerText = 'Draw';
+        setStyle();
       }
     }else if(this.threePlayerGame) {
       
       if (!this.gameIsOver && !this.fieldsSmall.includes(0) && !this.winnerFirstPlayer && !this.winnerSecondPlayer && !this.winnerThirdPlayer) {
-        this.setPointerEvents('none');
-        winnerBox.classList.add("winner-box");
-        newGameBtn.style.display = 'block';
-        drawText.style.display = "block";
-        drawText.innerText = 'Draw';
+
+        setStyle();
       } 
       
       if (!this.gameIsOver && !this.fieldsMedium.includes(0) && !this.winnerFirstPlayer && !this.winnerSecondPlayer && !this.winnerThirdPlayer) {
-        this.setPointerEvents('none');
-        winnerBox.classList.add("winner-box");
-        newGameBtn.style.display = 'block';
-        drawText.style.display = "block";
-        drawText.innerText = 'Draw';
+
+        setStyle();
       }
     }
    
@@ -546,152 +530,124 @@ export class GameComponent implements OnInit {
       let chunkedArray = this.chunkArray(this.fieldsMedium, 5)
        console.log(this.fieldsMedium);
       console.log(chunkedArray);
+
+      //Horizontal winning chance
+      let horizontalWinningChance = (selectedIcon, x) => {
+       return chunkedArray[x][0] === selectedIcon && chunkedArray[x][1] === selectedIcon && chunkedArray[x][2] === selectedIcon||
+            chunkedArray[x][1] === selectedIcon && chunkedArray[x][2] === selectedIcon && chunkedArray[x][3] === selectedIcon||
+            chunkedArray[x][2] === selectedIcon && chunkedArray[x][3] === selectedIcon && chunkedArray[x][4] === selectedIcon
+      }
       
-      //Horizontal
+      //Vertical winning chance
+
+      let verticalWinningChance = (selectedIcon, y) => {
+        return chunkedArray[0][y] === selectedIcon && chunkedArray[1][y] === selectedIcon && chunkedArray[2][y] === selectedIcon ||
+        chunkedArray[1][y] === selectedIcon && chunkedArray[2][y] === selectedIcon && chunkedArray[3][y] === selectedIcon ||
+        chunkedArray[2][y] === selectedIcon && chunkedArray[3][y] === selectedIcon && chunkedArray[4][y] === selectedIcon
+      }
+
+      //Diagonal winning chance
+      let diagonalWinningChance = (selectedIcon, y) => {
+        return chunkedArray[y][y] === selectedIcon && chunkedArray[y+1][y+1] === selectedIcon && chunkedArray[y+2][y+2] === selectedIcon||
+        chunkedArray[y][y+1] === selectedIcon && chunkedArray[y+1][y+2] === selectedIcon && chunkedArray[y+2][y+3] === selectedIcon|| 
+        chunkedArray[0][y+2] === selectedIcon && chunkedArray[1][3] === selectedIcon && chunkedArray[2][4] === selectedIcon||
+        chunkedArray[1][0] === selectedIcon && chunkedArray[2][1] === selectedIcon && chunkedArray[3][2] === selectedIcon||
+        chunkedArray[2][1] === selectedIcon && chunkedArray[3][2] === selectedIcon && chunkedArray[4][3] === selectedIcon||
+        chunkedArray[2][0] === selectedIcon && chunkedArray[3][1] === selectedIcon && chunkedArray[4][2] === selectedIcon||
+        chunkedArray[4][0] === selectedIcon && chunkedArray[3][1] === selectedIcon && chunkedArray[2][2] === selectedIcon||
+        chunkedArray[3][1] === selectedIcon && chunkedArray[2][2] === selectedIcon && chunkedArray[1][3] === selectedIcon||
+        chunkedArray[2][0] === selectedIcon && chunkedArray[1][1] === selectedIcon && chunkedArray[0][2] === selectedIcon||
+        chunkedArray[3][0] === selectedIcon && chunkedArray[2][1] === selectedIcon && chunkedArray[1][2] === selectedIcon||
+        chunkedArray[2][1] === selectedIcon && chunkedArray[1][2] === selectedIcon && chunkedArray[0][3] === selectedIcon||
+        chunkedArray[4][1] === selectedIcon && chunkedArray[3][2] === selectedIcon && chunkedArray[2][3] === selectedIcon||
+        chunkedArray[3][2] === selectedIcon && chunkedArray[2][3] === selectedIcon && chunkedArray[1][4] === selectedIcon||
+        chunkedArray[4][2] === selectedIcon && chunkedArray[3][3] === selectedIcon && chunkedArray[2][4] === selectedIcon||
+        chunkedArray[2][2] === selectedIcon && chunkedArray[1][3] === selectedIcon && chunkedArray[0][4] === selectedIcon
+      }
+
+    
+      //Horizontal 
       //First player
       for (let x = 0; x < chunkedArray.length; x++) {
-        if( chunkedArray[x][0] === playersObject.firstPalyerselectedIcon && chunkedArray[x][1] === playersObject.firstPalyerselectedIcon && chunkedArray[x][2] === playersObject.firstPalyerselectedIcon||
-            chunkedArray[x][1] === playersObject.firstPalyerselectedIcon && chunkedArray[x][2] === playersObject.firstPalyerselectedIcon && chunkedArray[x][3] === playersObject.firstPalyerselectedIcon||
-            chunkedArray[x][2] === playersObject.firstPalyerselectedIcon && chunkedArray[x][3] === playersObject.firstPalyerselectedIcon && chunkedArray[x][4] === playersObject.firstPalyerselectedIcon
-        ){
 
+        if(horizontalWinningChance(playersObject.firstPalyerselectedIcon, x)) {
           console.log('firstPlayer won')
           this.winnerFirstPlayer = true;
           this.winnerFirstPlayerMediumBoard = true;
-         
         }
+
       //Second player
-        if( chunkedArray[x][0] === playersObject.secondPalyerselectedIcon && chunkedArray[x][1] === playersObject.secondPalyerselectedIcon && chunkedArray[x][2] === playersObject.secondPalyerselectedIcon ||
-            chunkedArray[x][1] === playersObject.secondPalyerselectedIcon && chunkedArray[x][2] === playersObject.secondPalyerselectedIcon && chunkedArray[x][3] === playersObject.secondPalyerselectedIcon ||
-            chunkedArray[x][2] === playersObject.secondPalyerselectedIcon && chunkedArray[x][3] === playersObject.secondPalyerselectedIcon && chunkedArray[x][4] === playersObject.secondPalyerselectedIcon
-        ){
+
+
+        if(horizontalWinningChance(playersObject.secondPalyerselectedIcon, x)) {
           console.log('secondPlayer won')
           this.winnerSecondPlayer = true;
           this.winnerSecondPlayerMediumBoard = true;
-          
         }
+
+
       
        //Third player  
-       if( chunkedArray[x][0] === playersObject.thirdPalyerselectedIcon && chunkedArray[x][1] === playersObject.thirdPalyerselectedIcon && chunkedArray[x][2] === playersObject.thirdPalyerselectedIcon||
-        chunkedArray[x][1] === playersObject.thirdPalyerselectedIcon && chunkedArray[x][2] === playersObject.thirdPalyerselectedIcon && chunkedArray[x][3] === playersObject.thirdPalyerselectedIcon||
-        chunkedArray[x][2] === playersObject.thirdPalyerselectedIcon && chunkedArray[x][3] === playersObject.thirdPalyerselectedIcon && chunkedArray[x][4] === playersObject.thirdPalyerselectedIcon
-        ){
 
+
+        if(horizontalWinningChance(playersObject.thirdPalyerselectedIcon, x)) {
           console.log('thirdPlayer won')
           this.winnerThirdPlayer = true;
           this.winnerThirdPlayerMediumBoard = true;
-        
         }
   
         //Vertical
         //First player
         for(let i = 0; i < 5; i++) {
-          if(chunkedArray[0][i] === playersObject.firstPalyerselectedIcon && chunkedArray[1][i] === playersObject.firstPalyerselectedIcon && chunkedArray[2][i] === playersObject.firstPalyerselectedIcon ||
-             chunkedArray[1][i] === playersObject.firstPalyerselectedIcon && chunkedArray[2][i] === playersObject.firstPalyerselectedIcon && chunkedArray[3][i] === playersObject.firstPalyerselectedIcon ||
-             chunkedArray[2][i] === playersObject.firstPalyerselectedIcon && chunkedArray[3][i] === playersObject.firstPalyerselectedIcon && chunkedArray[4][i] === playersObject.firstPalyerselectedIcon) 
-             {
+ 
+             if(verticalWinningChance(playersObject.firstPalyerselectedIcon, i)) {
               console.log('firstPlayer won')
               this.winnerFirstPlayer = true;
               this.winnerFirstPlayerMediumBoard = true;
-             
              }
           //Second player 
-         if( chunkedArray[0][i] === playersObject.secondPalyerselectedIcon && chunkedArray[1][i] === playersObject.secondPalyerselectedIcon && chunkedArray[2][i] === playersObject.secondPalyerselectedIcon ||
-             chunkedArray[1][i] === playersObject.secondPalyerselectedIcon && chunkedArray[2][i] === playersObject.secondPalyerselectedIcon && chunkedArray[3][i] === playersObject.secondPalyerselectedIcon ||
-             chunkedArray[2][i] === playersObject.secondPalyerselectedIcon && chunkedArray[3][i] === playersObject.secondPalyerselectedIcon && chunkedArray[4][i] === playersObject.secondPalyerselectedIcon) 
-             {
+
+             if(verticalWinningChance(playersObject.secondPalyerselectedIcon, i)) {
               console.log('secondPlayer won')
               this.winnerSecondPlayer = true;
               this.winnerSecondPlayerMediumBoard = true;
-              
-            
              }
+
              //Third player  
-             if(chunkedArray[0][i] === playersObject.thirdPalyerselectedIcon && chunkedArray[1][i] === playersObject.thirdPalyerselectedIcon && chunkedArray[2][i] === playersObject.thirdPalyerselectedIcon ||
-              chunkedArray[1][i] === playersObject.thirdPalyerselectedIcon && chunkedArray[2][i] === playersObject.thirdPalyerselectedIcon && chunkedArray[3][i] === playersObject.thirdPalyerselectedIcon ||
-              chunkedArray[2][i] === playersObject.thirdPalyerselectedIcon && chunkedArray[3][i] === playersObject.thirdPalyerselectedIcon && chunkedArray[4][i] === playersObject.thirdPalyerselectedIcon) 
-              {
-               console.log('thirdPlayer won')
-               this.winnerThirdPlayer = true;
-               this.winnerThirdPlayerMediumBoard = true;
-              
-              }
+  
+
+              if(verticalWinningChance(playersObject.thirdPalyerselectedIcon, i)) {
+                console.log('thirdPlayer won')
+                this.winnerThirdPlayer = true;
+                this.winnerThirdPlayerMediumBoard = true;
+               }
         }
 
   
         //Diagonal
         //First player
         for(let y = 0; y < 3; y++) {
-          if(chunkedArray[y][y] ===  playersObject.firstPalyerselectedIcon && chunkedArray[y+1][y+1] ===  playersObject.firstPalyerselectedIcon && chunkedArray[y+2][y+2] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[y][y+1] ===  playersObject.firstPalyerselectedIcon && chunkedArray[y+1][y+2] ===  playersObject.firstPalyerselectedIcon && chunkedArray[y+2][y+3] ===  playersObject.firstPalyerselectedIcon|| 
-             chunkedArray[0][y+2] ===  playersObject.firstPalyerselectedIcon && chunkedArray[1][3] ===  playersObject.firstPalyerselectedIcon && chunkedArray[2][4] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[1][0] ===  playersObject.firstPalyerselectedIcon && chunkedArray[2][1] ===  playersObject.firstPalyerselectedIcon && chunkedArray[3][2] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[2][1] ===  playersObject.firstPalyerselectedIcon && chunkedArray[3][2] ===  playersObject.firstPalyerselectedIcon && chunkedArray[4][3] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[2][0] ===  playersObject.firstPalyerselectedIcon && chunkedArray[3][1] ===  playersObject.firstPalyerselectedIcon && chunkedArray[4][2] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[4][0] ===  playersObject.firstPalyerselectedIcon && chunkedArray[3][1] ===  playersObject.firstPalyerselectedIcon && chunkedArray[2][2] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[3][1] ===  playersObject.firstPalyerselectedIcon && chunkedArray[2][2] ===  playersObject.firstPalyerselectedIcon && chunkedArray[1][3] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[2][0] ===  playersObject.firstPalyerselectedIcon && chunkedArray[1][1] ===  playersObject.firstPalyerselectedIcon && chunkedArray[0][2] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[3][0] ===  playersObject.firstPalyerselectedIcon && chunkedArray[2][1] ===  playersObject.firstPalyerselectedIcon && chunkedArray[1][2] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[2][1] ===  playersObject.firstPalyerselectedIcon && chunkedArray[1][2] ===  playersObject.firstPalyerselectedIcon && chunkedArray[0][3] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[4][1] ===  playersObject.firstPalyerselectedIcon && chunkedArray[3][2] ===  playersObject.firstPalyerselectedIcon && chunkedArray[2][3] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[3][2] ===  playersObject.firstPalyerselectedIcon && chunkedArray[2][3] ===  playersObject.firstPalyerselectedIcon && chunkedArray[1][4] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[4][2] ===  playersObject.firstPalyerselectedIcon && chunkedArray[3][3] ===  playersObject.firstPalyerselectedIcon && chunkedArray[2][4] ===  playersObject.firstPalyerselectedIcon||
-             chunkedArray[2][2] ===  playersObject.firstPalyerselectedIcon && chunkedArray[1][3] ===  playersObject.firstPalyerselectedIcon && chunkedArray[0][4] ===  playersObject.firstPalyerselectedIcon) 
-             
-             
-            
-             {
+
+             if(diagonalWinningChance(playersObject.firstPalyerselectedIcon, y)) {
               console.log('firstPlayer won')
               this.winnerFirstPlayer = true;
               this.winnerFirstPlayerMediumBoard = true;
-             
              }
            //Second player
-          if( chunkedArray[y][y] === playersObject.secondPalyerselectedIcon && chunkedArray[y+1][y+1] === playersObject.secondPalyerselectedIcon && chunkedArray[y+2][y+2] === playersObject.secondPalyerselectedIcon ||
-              chunkedArray[y][y+1] === playersObject.secondPalyerselectedIcon && chunkedArray[y+1][y+2] === playersObject.secondPalyerselectedIcon && chunkedArray[y+2][y+3] === playersObject.secondPalyerselectedIcon|| 
-              chunkedArray[0][y+2] === playersObject.secondPalyerselectedIcon && chunkedArray[1][3] === playersObject.secondPalyerselectedIcon && chunkedArray[2][4] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[1][0] === playersObject.secondPalyerselectedIcon && chunkedArray[2][1] === playersObject.secondPalyerselectedIcon && chunkedArray[3][2] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[2][1] === playersObject.secondPalyerselectedIcon && chunkedArray[3][2] === playersObject.secondPalyerselectedIcon && chunkedArray[4][3] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[2][0] === playersObject.secondPalyerselectedIcon && chunkedArray[3][1] === playersObject.secondPalyerselectedIcon && chunkedArray[4][2] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[4][0] === playersObject.secondPalyerselectedIcon && chunkedArray[3][1] === playersObject.secondPalyerselectedIcon && chunkedArray[2][2] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[3][1] === playersObject.secondPalyerselectedIcon && chunkedArray[2][2] === playersObject.secondPalyerselectedIcon && chunkedArray[1][3] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[2][0] === playersObject.secondPalyerselectedIcon && chunkedArray[1][1] === playersObject.secondPalyerselectedIcon && chunkedArray[0][2] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[3][0] === playersObject.secondPalyerselectedIcon && chunkedArray[2][1] === playersObject.secondPalyerselectedIcon && chunkedArray[1][2] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[2][1] === playersObject.secondPalyerselectedIcon && chunkedArray[1][2] === playersObject.secondPalyerselectedIcon && chunkedArray[0][3] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[4][1] === playersObject.secondPalyerselectedIcon && chunkedArray[3][2] === playersObject.secondPalyerselectedIcon && chunkedArray[2][3] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[3][2] === playersObject.secondPalyerselectedIcon && chunkedArray[2][3] === playersObject.secondPalyerselectedIcon && chunkedArray[1][4] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[4][2] === playersObject.secondPalyerselectedIcon && chunkedArray[3][3] === playersObject.secondPalyerselectedIcon && chunkedArray[2][4] === playersObject.secondPalyerselectedIcon||
-              chunkedArray[2][2] === playersObject.secondPalyerselectedIcon && chunkedArray[1][3] === playersObject.secondPalyerselectedIcon && chunkedArray[0][4] === playersObject.secondPalyerselectedIcon) 
-                       
-             {
-              console.log('secondPlayer won')
-              this.winnerSecondPlayer = true;
-              this.winnerSecondPlayerMediumBoard = true;
-              
-              }
+
+              if(diagonalWinningChance(playersObject.secondPalyerselectedIcon, y)) {
+                console.log('secondPlayer won')
+                this.winnerSecondPlayer = true;
+                this.winnerSecondPlayerMediumBoard = true;
+               }
 
                //Third player  
-               if(chunkedArray[y][y] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[y+1][y+1] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[y+2][y+2] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[y][y+1] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[y+1][y+2] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[y+2][y+3] ===  playersObject.thirdPalyerselectedIcon|| 
-                chunkedArray[0][y+2] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[1][3] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[2][4] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[1][0] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[2][1] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[3][2] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[2][1] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[3][2] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[4][3] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[2][0] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[3][1] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[4][2] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[4][0] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[3][1] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[2][2] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[3][1] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[2][2] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[1][3] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[2][0] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[1][1] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[0][2] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[3][0] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[2][1] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[1][2] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[2][1] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[1][2] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[0][3] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[4][1] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[3][2] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[2][3] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[3][2] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[2][3] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[1][4] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[4][2] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[3][3] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[2][4] ===  playersObject.thirdPalyerselectedIcon||
-                chunkedArray[2][2] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[1][3] ===  playersObject.thirdPalyerselectedIcon && chunkedArray[0][4] ===  playersObject.thirdPalyerselectedIcon) 
-                {
-                 console.log('thirdPlayer won')
-                 this.winnerThirdPlayer = true;
-                 this.winnerThirdPlayerMediumBoard = true;
                 
-                }
+              if(diagonalWinningChance(playersObject.thirdPalyerselectedIcon, y)) {
+                console.log('thirdPlayer won')
+                this.winnerThirdPlayer = true;
+                this.winnerThirdPlayerMediumBoard = true;
+               }
         }
       
       }
@@ -735,4 +691,10 @@ export class GameComponent implements OnInit {
     
     
     //-----------------Medium Board Creating END----------------------
+
+    //-----------------Large Board Creating START----------------------
+
+    
+    //-----------------Large Board Creating END----------------------
+
 }
