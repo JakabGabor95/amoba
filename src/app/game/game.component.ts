@@ -16,6 +16,7 @@ export class GameComponent implements OnInit {
   //default fields
   fieldsSmall: any = Array(9).fill(0);
   fieldsMedium: any = Array(25).fill(0);
+  fieldsLarge: any = Array(100).fill(0);
 
    //placed marker arrays
    fieldsOfFirstPlayer:Array<Array<number>> = [];
@@ -82,6 +83,13 @@ export class GameComponent implements OnInit {
         
         if(playersObj.map === 'medium') {
           this.createMediumBoard(playersObj);
+          this.playersObject = playersObj;
+          this.firstPlayerName = playersObj.firstPlayerName;
+          this.secondPlayerName = playersObj.secondPlayerName;
+        }
+
+        if(playersObj.map === 'large') {
+          this.createLargeBoard(playersObj);
           this.playersObject = playersObj;
           this.firstPlayerName = playersObj.firstPlayerName;
           this.secondPlayerName = playersObj.secondPlayerName;
@@ -693,8 +701,59 @@ export class GameComponent implements OnInit {
     //-----------------Medium Board Creating END----------------------
 
     //-----------------Large Board Creating START----------------------
+    createLargeBoard = (playersObject:any) => {
+      this.gameIsOver = false;
+      const largeBoard: HTMLElement = document.querySelector('.board');
+  
+      this.fieldsLarge.forEach((field, index) => {
+        if(this.gameIsOver) {
+          largeBoard.innerText = '';      
+        }
+  
+        let fieldLargeDiv = document.createElement('div');
+  
+        fieldLargeDiv.setAttribute('class', 'field fieldsLarge');
+  
+        fieldLargeDiv.style.border = "3px solid #ffe3ded2";
+        fieldLargeDiv.style.width = "10%";
+        fieldLargeDiv.style.height = "10%";
+        fieldLargeDiv.style.color = "#ffe3ded2";
+        fieldLargeDiv.style.fontSize = "3rem";
+        fieldLargeDiv.style.display = "flex";
+        fieldLargeDiv.style.justifyContent = "center";
+        fieldLargeDiv.style.alignItems = "center";
+        fieldLargeDiv.style.cursor = "pointer";
+  
+        
+        fieldLargeDiv.addEventListener('click', () => {
+          
+          this.getCurrentSquare(fieldLargeDiv, index, playersObject);
+          fieldLargeDiv.style.pointerEvents = 'none';
+  
+          //chances of winning
+          this.chancesOfWinningMediumBoard(playersObject);
+  
+          //Who is the winner?
+          if(!this.threePlayerGame) {
+           
+              this.firstPlayerIsTheWinner();
+              this.secondPlayerIsTheWinner();
+            
+          }else if(this.threePlayerGame) {
+            this.firstPlayerIsTheWinner();
+            this.secondPlayerIsTheWinner();
+            this.thirdPlayerIsTheWinner();
+          }  
+  
+          //Draw?
+          this.checkEndOfTheGame();
+        })
+  
+        largeBoard.appendChild(fieldLargeDiv);
+  
+      });
+    }
 
-    
     //-----------------Large Board Creating END----------------------
 
 }
